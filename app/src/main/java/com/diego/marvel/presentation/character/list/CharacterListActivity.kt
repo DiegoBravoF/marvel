@@ -1,6 +1,8 @@
 package com.diego.marvel.presentation.character.list
 
 import android.os.Bundle
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.diego.marvel.databinding.ActivityCharacterListBinding
 import com.diego.marvel.presentation.character.list.adapter.CharacterAdapter
 import com.diego.marvel.presentation.common.BaseActivity
@@ -21,6 +23,12 @@ class CharacterListActivity : BaseActivity<ActivityCharacterListBinding>(), Char
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.attachView(this)
+        binding.recyclerCharacters.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                RecyclerView.VERTICAL
+            )
+        )
     }
 
     override fun fillCharacters(characterList: List<CharacterViewModel>) {

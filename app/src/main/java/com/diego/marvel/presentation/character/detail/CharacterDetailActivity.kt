@@ -3,6 +3,7 @@ package com.diego.marvel.presentation.character.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.diego.marvel.databinding.ActivityCharacterDetailBinding
 import com.diego.marvel.presentation.common.BaseActivity
@@ -31,7 +32,19 @@ class CharacterDetailActivity : BaseActivity<ActivityCharacterDetailBinding>(),
         super.onCreate(savedInstanceState)
         presenter.attachView(this)
         presenter.setCharacter(intent.getParcelableExtra(CHARACTER))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 
     override fun fillCharacter(character: CharacterViewModel) {

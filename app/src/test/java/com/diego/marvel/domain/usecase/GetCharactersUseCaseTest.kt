@@ -24,16 +24,12 @@ class GetCharactersUseCaseTest {
 
     @Before
     fun setup() {
-        initUseCase()
-    }
-
-    private fun initUseCase() {
         sut = GetCharactersUseCase(repository)
     }
 
     @Test
     @Throws(Exception::class)
-    fun testOnGetCharactersCallOnlyOnce() {
+    fun `should call only 1 time`() {
         runBlocking {
             sut.execution()
             verify(repository, times(1)).getCharacters()
@@ -42,7 +38,7 @@ class GetCharactersUseCaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun testOnGetCharactersResultIsCorrect() {
+    fun `should get data from repository without modified`() {
         runBlocking {
             val remoteObject = listOf(RemoteStub.testCharacter)
             whenever(repository.getCharacters()).thenReturn(Either.Right(remoteObject))

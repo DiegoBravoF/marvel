@@ -32,7 +32,7 @@ class MarvelRepositoryImpTest {
 
     @Test
     @Throws(Exception::class)
-    fun onRequestObjectReceiveDataProperly() {
+    fun `on request characters receive data properly`() {
         server.enqueue(MockApiResponse.serviceCharactersSuccess())
 
         runBlocking {
