@@ -1,14 +1,15 @@
-package com.diego.marvel.presentation.characterlist.adapter
+package com.diego.marvel.presentation.character.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.diego.marvel.databinding.ItemCharacterBinding
 import com.diego.marvel.presentation.model.CharacterViewModel
 
 class CharacterAdapter(
     private val characterList: List<CharacterViewModel>,
-    private val characterClicked: (CharacterViewModel) -> Unit
+    private val characterClicked: (CharacterViewModel, ImageView) -> Unit
 ) : RecyclerView.Adapter<CharacterViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,

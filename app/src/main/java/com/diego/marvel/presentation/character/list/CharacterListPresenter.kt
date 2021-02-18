@@ -1,4 +1,4 @@
-package com.diego.marvel.presentation.characterlist
+package com.diego.marvel.presentation.character.list
 
 import com.diego.marvel.domain.respository.model.Character
 import com.diego.marvel.domain.usecase.GetCharactersUseCase
