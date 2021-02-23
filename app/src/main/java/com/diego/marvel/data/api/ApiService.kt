@@ -6,6 +6,7 @@ import com.diego.marvel.data.api.response.MarvelResultsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 
 interface ApiService {
     companion object {
@@ -17,4 +18,9 @@ interface ApiService {
     @Headers(CONTENT_TYPE, ACCEPT)
     @GET("/v1/public/characters")
     fun getCharacters(): Call<MarvelBaseResponse<MarvelResultsResponse<CharacterResponse>>>
+
+    @Headers(CONTENT_TYPE, ACCEPT)
+    @GET("/v1/public/characters/{id}")
+    fun getCharacter(@Path("id") id: String):
+            Call<MarvelBaseResponse<MarvelResultsResponse<CharacterResponse>>>
 }

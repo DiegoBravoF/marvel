@@ -1,4 +1,4 @@
-package com.diego.marvel.domain.respository.model
+package com.diego.marvel.domain.model
 
 import com.diego.marvel.presentation.model.CharacterViewModel
 

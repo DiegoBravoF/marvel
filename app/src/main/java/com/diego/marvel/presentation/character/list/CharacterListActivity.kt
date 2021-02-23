@@ -1,6 +1,7 @@
 package com.diego.marvel.presentation.character.list
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.diego.marvel.databinding.ActivityCharacterListBinding
@@ -32,24 +33,17 @@ class CharacterListActivity : BaseActivity<ActivityCharacterListBinding>(), Char
     }
 
     override fun fillCharacters(characterList: List<CharacterViewModel>) {
+        binding.recyclerCharacters.visibility = View.VISIBLE
         binding.recyclerCharacters.adapter = CharacterAdapter(characterList) { character, image ->
             navigator.showHeroDetails(this, character, image)
         }
     }
 
-    override fun showLoading() {//TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showLoading() {
+        binding.progress.visibility = View.VISIBLE
     }
 
-    override fun hideLoading() {//TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun hideLoading() {
+        binding.progress.visibility = View.GONE
     }
-
-    override fun showConnectionError() {//TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showDefaultError() {//TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showError(errorDescription: String) {//TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 }

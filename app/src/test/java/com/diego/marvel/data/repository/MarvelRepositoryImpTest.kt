@@ -4,7 +4,7 @@ import com.diego.marvel.data.MarvelRepositoryImp
 import com.diego.marvel.data.MockApiResponse
 import com.diego.marvel.data.TestNetworkModule
 import com.diego.marvel.domain.respository.MarvelRepository
-import com.diego.marvel.domain.respository.model.Character
+import com.diego.marvel.domain.model.Character
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After

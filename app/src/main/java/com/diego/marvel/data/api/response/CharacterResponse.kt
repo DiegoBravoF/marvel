@@ -1,6 +1,6 @@
 package com.diego.marvel.data.api.response
 
-import com.diego.marvel.domain.respository.model.Character
+import com.diego.marvel.domain.model.Character
 import kotlinx.serialization.Serializable
 
 @Serializable

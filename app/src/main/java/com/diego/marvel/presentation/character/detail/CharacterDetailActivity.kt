@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import com.bumptech.glide.Glide
 import com.diego.marvel.databinding.ActivityCharacterDetailBinding
 import com.diego.marvel.presentation.common.BaseActivity
 import com.diego.marvel.presentation.model.CharacterViewModel
+import com.diego.marvel.presentation.navigation.Navigator
+import com.diego.marvel.util.DeepLinkManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -17,12 +20,18 @@ class CharacterDetailActivity : BaseActivity<ActivityCharacterDetailBinding>(),
     companion object {
         private const val CHARACTER = "com.diego.CHARACTER"
 
-        fun buildIntent(context: Context, characterViewModel: CharacterViewModel): Intent {
+        fun buildIntent(
+            context: Context,
+            characterViewModel: CharacterViewModel
+        ): Intent {
             val intent = Intent(context, CharacterDetailActivity::class.java)
             intent.putExtra(CHARACTER, characterViewModel)
             return intent
         }
     }
+
+    @Inject
+    lateinit var navigator: Navigator
 
     @Inject
     lateinit var presenter: CharacterDetailPresenter
@@ -33,6 +42,16 @@ class CharacterDetailActivity : BaseActivity<ActivityCharacterDetailBinding>(),
         presenter.attachView(this)
         presenter.setCharacter(intent.getParcelableExtra(CHARACTER))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        intent.dataString?.let { string ->
+            DeepLinkManager.getInstance().parse(string).getCharacter {
+                presenter.getCharacterById(it)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -56,18 +75,11 @@ class CharacterDetailActivity : BaseActivity<ActivityCharacterDetailBinding>(),
 
     }
 
-    override fun showLoading() {//TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showLoading() {
+        binding.progress.visibility = View.VISIBLE
     }
 
-    override fun hideLoading() {//TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showConnectionError() {//TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showDefaultError() {//TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showError(errorDescription: String) {//TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun hideLoading() {
+        binding.progress.visibility = View.GONE
     }
 }

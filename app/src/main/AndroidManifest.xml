@@ -19,7 +19,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.character.detail.CharacterDetailActivity" />
+        <activity android:name=".presentation.character.detail.CharacterDetailActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="marvelApp"
+                    android:scheme="marveldiego" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

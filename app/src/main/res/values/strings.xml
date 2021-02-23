@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Marvel</string>
+    <string name="connectionError">Error de conexión</string>
+    <string name="defaultError">No se ha podido conectar con el servidor</string>
 </resources>

@@ -13,9 +13,9 @@ abstract class UseCase<T> {
 
     operator fun invoke(
         onSuccess: (T) -> Unit,
-        genericError: () -> Unit,
+        noConnection: () -> Unit,
         onApiError: (ApiError) -> Unit,
-        noConnection: () -> Unit
+        genericError: () -> Unit
     ) {
         job = launch {
             val result = asyncSeq { execution() }
@@ -23,9 +23,9 @@ abstract class UseCase<T> {
                 onSuccess(result.rightValue)
             } else {
                 when (result.leftValue) {
-                    is Failure.GenericError -> genericError()
-                    is Failure.NoConnectionError -> noConnection()
                     is Failure.ServerError -> onApiError((result.leftValue as Failure.ServerError).error)
+                    is Failure.NoConnectionError -> noConnection()
+                    else -> genericError()
                 }
             }
         }

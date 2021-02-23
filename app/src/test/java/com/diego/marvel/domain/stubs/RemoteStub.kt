@@ -1,6 +1,6 @@
 package com.diego.marvel.domain.stubs
 
-import com.diego.marvel.domain.respository.model.Character
+import com.diego.marvel.domain.model.Character
 
 object RemoteStub {
     val testCharacter: Character

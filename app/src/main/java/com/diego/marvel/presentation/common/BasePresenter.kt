@@ -18,11 +18,16 @@ abstract class BasePresenter<V : BaseView> {
     fun <T> execute(
         useCase: UseCase<T>,
         onSuccess: (T) -> Unit,
-        genericError: () -> Unit = this::genericError,
         noConnection: () -> Unit = this::connectionError,
-        apiError: (ApiError) -> Unit = this::onApiError
+        apiError: (ApiError) -> Unit = this::onApiError,
+        genericError: () -> Unit = this::genericError
     ) {
-        useCase(onSuccess, genericError, apiError, noConnection)
+        useCase(
+            onSuccess = onSuccess,
+            noConnection = noConnection,
+            onApiError = apiError,
+            genericError = genericError
+        )
     }
 
 
